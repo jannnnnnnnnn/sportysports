@@ -2,10 +2,11 @@ import React from 'react'
 import { BsJustify } from "react-icons/bs";
 import { GiSoccerBall } from "react-icons/gi";
 import "bootstrap/dist/css/bootstrap.min.css";
+import {Button, Alert, Breadcrumb, BreadcrumbItem, Card, Form, Container, Row, Col} from "react-bootstrap";
 
 const Sidebar = () => {
     return (
-        <nav>
+        <nav >
         <BsJustify />
         <ul>
           <li>
