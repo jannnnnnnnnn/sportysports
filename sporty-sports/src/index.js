@@ -4,9 +4,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { DAppProvider, ChainId } from '@usedapp/core'
+
+const config = {
+  readOnlyChainId: ChainId.Mainnet,
+  readOnlyUrls: {
+    [ChainId.Mainnet]: `https://eth-mainnet.alchemyapi.io/v2/${process.env.REACT_APP_ALCHEMY_APIKEY}`,
+  },
+}
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <DAppProvider config={config}>
+      <App />
+    </DAppProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
