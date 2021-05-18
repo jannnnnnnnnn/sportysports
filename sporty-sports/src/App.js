@@ -6,6 +6,8 @@ import {Button, Alert, Breadcrumb, BreadcrumbItem, Card, Form, Container, Row, C
 
 import Sidebar from './components/Sidebar';
 import Main from './components/Main';
+import CheckBalance from './components/CheckBalance/CheckBalance';
+import ConnectToWallet from './components/ConnectToWallet/ConnectToWallet';
 
 function App() {
   return (
@@ -16,11 +18,15 @@ function App() {
         </div>
         <div id="content">
           <Main />
+          <CheckBalance />
+          <ConnectToWallet />
         </div>
         
       </div>
     </div>
   );
 }
+
+
 
 export default App;
