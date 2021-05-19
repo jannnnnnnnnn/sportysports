@@ -21,21 +21,34 @@ function App() {
     <div className="container-fluid" id="wrapper">
      
       <header>
-        <h1>Sporty Sports</h1>
-        <CheckBalance />
-        <ConnectToWallet />
+        <Row>
+          <Col className="col-9">
+            <h1>Sporty Sports</h1>
+          </Col>
+          <Col>
+            <CheckBalance />
+            <ConnectToWallet />
+          </Col>
+        </Row>
       </header>
 
       <div className="row">
-        <div id="sidebar">
-          <Sidebar />
-        </div>
+        <Row>
+          <Col>
+            <div id="sidebar">
+              <Sidebar />
+            </div>
+          </Col>
+          <Col className="col-8">
           <Route exact path="/winner-pool" component={Winner_pool} />
           <Route exact path="/about-us" component={About_us} />
           <Route exact path="/faq" component={FAQ} />
           <Route exact path="/playoff-pool" component={Playoff_pool} />
           <Route exact path="/main" component={Main} />
+      </Col>
+      </Row>
       </div>
+      
     </div>
   );
 }

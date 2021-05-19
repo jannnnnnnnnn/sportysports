@@ -1,17 +1,18 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const Main = () => {
     return (
         
         <div>
-            <br/>
+            
             <ul>
                 <li>
-                    <h2>Winner Pool</h2>
+                    <h2><Link to="./winner-pool">Winner Pool</Link></h2>
                 </li>
 
                 <li>
-                    <h2>Playoff Pool</h2>
+                    <h2><Link to="./playoff-pool">Playoff Pool</Link></h2>
                 </li>
            </ul>
         </div>
