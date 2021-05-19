@@ -1,61 +1,54 @@
 import React from 'react'
-import { BsJustify } from "react-icons/bs";
-import { GiSoccerBall } from "react-icons/gi";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar'
+import { Nav, NavDropdown } from 'react-bootstrap';
+
+
 
 const Sidebar = () => {
     return (
-        <nav >
-        <BsJustify />
-        <ul>
-          <li>
-            <h2><Link to='./main'>Home</Link></h2>
-          </li>
-          <li>
-            < GiSoccerBall />
-            <h2>Soccer</h2>
-            <ul>
-  
-                    <li>
-                    <h2>Premier League</h2>
-                    </li>
-        
-                    <li>
-                    <h2>Euro Cup</h2>
-                    </li>
-        
-             </ul>
-          </li>
+        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" >
+          <Navbar.Brand href="./main">Menu</Navbar.Brand>
+         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav >
           
-          <li>
-          <h2>Popular Pools</h2>
-            <ul>
-                <li>
-                <h2><Link to='./winner-pool'>Winner</Link></h2>
-                </li>
-                <li>
-                <h2><Link to="./playoff-pool">Finals</Link></h2>
-                </li>
-              </ul>
-          </li> 
+          <Nav.Link href="./main">Home</Nav.Link>
+          <Navbar.Brand>
+          <NavDropdown title="Soccer" id="collasible-nav-dropdown">
+            <NavDropdown.Item>
+              Premier League
+            </NavDropdown.Item>
+            
+            <NavDropdown.Item>
+            Euro Cup
+            </NavDropdown.Item>
+          </NavDropdown>
+          </Navbar.Brand>
+          <NavDropdown title="Popular Pools" id="collasible-nav-dropdown">
+          <NavDropdown.Item href="./winner-pool">
+          Winner
+            </NavDropdown.Item>
+            <NavDropdown.Item href="./playoff-pool">
+            Finals
+            </NavDropdown.Item>
+          </NavDropdown>
+
+          <NavDropdown title="My Pools" id="collasible-nav-dropdown">
+          <NavDropdown.Item href="./winner-pool">
+          Winner
+            </NavDropdown.Item>
+            <NavDropdown.Item href="./playoff-pool">
+            Finals
+            </NavDropdown.Item>
+          </NavDropdown>
+
+          <Nav.Link href="./about-us">About Us</Nav.Link>
+          <Nav.Link href="./faq">FAQ</Nav.Link>
           
-          <li>
-          <h2>My Pools</h2>
-            <ul>
-              <li>
-              <h2><Link to="./playoff-pool">Finals</Link></h2>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <h2><Link to='./about-us'>About Us</Link></h2>
-          </li>
-          <li>
-            <h2><Link to='./faq'>FAQ</Link></h2>
-          </li>
-        </ul>
-      </nav>
+        </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     )
 }
 
