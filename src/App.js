@@ -23,8 +23,10 @@ function App() {
      
       <header>
         <Row>
-          <Col className="col-9">
-            <h1>Sporty Sports</h1>
+          <Col className="col-9 ">
+            <div className="align-me">
+            <h1 >Sporty Sports</h1>
+            </div>
           </Col>
           <Col>
             <CheckBalance />
