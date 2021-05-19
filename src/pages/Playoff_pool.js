@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Main = () => {
+function Playoff_pool() {
     return (
         <div>
-            <h1>Sporty Sports</h1>
+            
         </div>
     )
 }
 
-export default Main
+export default Playoff_pool

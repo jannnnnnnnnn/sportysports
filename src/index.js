@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { DAppProvider, ChainId } from '@usedapp/core'
+import {BrowserRouter} from 'react-router-dom';
 
 const config = {
   readOnlyChainId: ChainId.Mainnet,
@@ -14,11 +15,13 @@ const config = {
 }
 
 ReactDOM.render(
-  <React.StrictMode>
-    <DAppProvider config={config}>
-      <App />
-    </DAppProvider>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <React.StrictMode>
+      <DAppProvider config={config}>
+        <App />
+      </DAppProvider>
+    </React.StrictMode>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
