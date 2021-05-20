@@ -6,32 +6,30 @@ const Main = () => {
     return (
         
         <div>
-            
-            <ul>
-                <li>
-                   <Link to="./winner-pool">
+            <Card className="text-center">
+                <Link to="./winner-pool">
                      <div>
-                         <h3>Winner Pool</h3>
-                         <h3>Boston vs. Vermont</h3>
-                         <h3>$10,000</h3>
+                         <Card.Header>Winner Pool</Card.Header>
+                        <Card.Title>Boston vs. Vermont</Card.Title>
+                         <Card.Subtitle>$10,000</Card.Subtitle>
                          
                          <Button>Deposit Dai</Button>
                      </div>
                    </Link>
-                </li>
+            </Card>
 
-                <li>
-                    <Link to="./playoff-pool">
-                        <div>
-                        <h3>Finals Pool</h3>
-                        <h3>Spain vs. Canada</h3>
-                         <h3>$10,000</h3>
+            <Card className="text-center">
+                <Link to="./playoff-pool">
+                    <div>
+                        <Card.Header>Finals Pool</Card.Header>
+                        <Card.Title>Spain vs. Canada</Card.Title>
+                         <Card.Subtitle>$10,000</Card.Subtitle>
                          
                          <Button>Deposit Dai</Button>
-                        </div>
-                    </Link>
-                </li>
-           </ul>
+                    </div>
+                </Link>
+            </Card>
+            
         </div>
     )
 }
