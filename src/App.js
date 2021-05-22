@@ -48,9 +48,11 @@ function App() {
           <Route exact path="/faq" component={FAQ} />
           <Route exact path="/playoff-pool" component={Playoff_pool} />
           <Route exact path="/main" component={Main} />
+          <Route exact path="/" component={Main} />
       </Col>
       </Row>
       </div>
+      
       
     </div>
   );
