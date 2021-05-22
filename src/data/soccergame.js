@@ -20,33 +20,86 @@ export const soccerLeagues = [
     icon: "serieA.jpg"
   }, 
 ]
-export const soccerTeams =[
+// export const soccerTeams =[
+//   {
+//     name:"manchester",
+//     icon:"manchaester.icon"
+//   },
+// ]
+
+//https://www.premierleague.com/tables
+export const soccerGame =[
   {
-    name:"manchester",
-    icon:"manchaester.icon"
+    gameID:"1",
+    team1:"Leicester City",
+    team1Icon:"leicester.svg",
+    team2:"Tottenham",
+    team2Icon:"Tottenham.svg",
+    gametime: "2021-06-02T11:00:00",
+    trophy:""  
+  },
+  {
+    gameID:"2",
+    team1:"",
+    team2:"",
+    gametime: "2021-06-03T11:00:00",
+    trophy:""  
+  },
+  {
+    gameID:"3",
+    team1:"",
+    team2:"",
+    gametime: "2021-06-04T11:00:00",
+    trophy:""  
+  },
+  { 
+    gameID:"4",
+    team1:"",
+    team2:"",
+    gametime: "2021-06-04T11:00:00",
+    trophy:""  
+  },
+  { 
+    gameID:"5",
+    team1:"",
+    team2:"",
+    gametime: "2021-06-05T11:00:00",
+    trophy:""  
   },
 ]
 
-export const soccerGame =[
+
+export const soccerPastGame =[
   {
+    gameID:"",
     team1:"",
     team2:"",
     gametime: "",
     trophy:""  
   },
   {
+    gameID:"",
     team1:"",
     team2:"",
     gametime: "",
     trophy:""  
   },
   {
+    gameID:"",
     team1:"",
     team2:"",
     gametime: "",
     trophy:""  
   },
-  {
+  { 
+    gameID:"",
+    team1:"",
+    team2:"",
+    gametime: "",
+    trophy:""  
+  },
+  { 
+    gameID:"",
     team1:"",
     team2:"",
     gametime: "",
