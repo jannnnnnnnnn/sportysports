@@ -5,12 +5,12 @@ pragma solidity >0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+//import "nft contract"
 
 // Game Pool Logic contract
 // Game Pools- Playoffs and Winners
 
 //need oracle to know game results
-//implement SafeERC20
 
 // Dai Itegration
 interface DaiToken {
@@ -32,7 +32,7 @@ contract owned {
     
     constructor() public{
         owner = msg.sender;
-        daitoken  = DaiToken(0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa);
+        daitoken  = DaiToken(0x001b3b4d0f3714ca98ba10f6042daebf0b1b7b6f); // DAI on mumbai
     }
     
     modifier onlyOwner {
@@ -94,6 +94,7 @@ contract InitPool {
     
     
     //---> check to make sure can only withdraw before deadline
+    //withdraws all funds so must set specific function to only draw funds put in for address before deadline --> move this function
     function withdraw() public {
         uint amount = pendingWithdraw[msg.sender];
         pendingWithdraw[msg.sender] = 0;
@@ -101,7 +102,6 @@ contract InitPool {
     }
 }
 
-//placeholders until time/match integration - can adapt to close pool before game start
 //sets deadline to enter game
 contract TimeLimit {
     uint256 public deadline;
@@ -154,17 +154,18 @@ contract sportPool is InitPool, TimeLimit {
     
  }
  
-
+//pass pool to contract
 contract moreSporty is owned {
     //allow deposits to contract
-    //function() publc payable; //can receive eth
+    // address payable public owner;
+    
     
     event JackpotWinners(uint256 amount); //emit how much winner won
     event TeamAWin(bool result); //check team A win
     event TeamBWin(bool result); //check team B win
     //other events?
     
-    address payable[] public players;
+    address payable[] public players; 
     uint256 public minimumBet; 
     uint256 public betTeamA; 
     uint256 public betTeamB;
@@ -173,11 +174,80 @@ contract moreSporty is owned {
     
     DaiToken public token;
     
+    struct Player {
+        //uint256 betAmount;
+        uint16 teamChoice;
+        
+     }
+    
     constructor() public{
         token = new owned();
+        
+        uint minimumBet = 20;
     }  // may need to change/split owned contract
     
-    // set up players[], map player address and team choice
-    // set game logic & give funds to winners
+    enum States { open, closed, complete, cancelled } // game state, open default
+    States state = states.open;
     
+    mapping(address => PlayerID) public PlayerID;
+    mapping(address => mapping(uint256 => uint256)) public betAmount;
+    
+    
+    function checkPlayerEntered(address payable player) public view returns bool{
+         for(uint256 i =0; i < players.length;i++){
+             if(players[i] == player) return true;
+             else {
+                 return false;
+             }
+         }
+    }
+    
+    function enterGame(){
+        
+    }
+    
+    function gameResult(){
+        
+    }
+    
+    /// can combine checkWinner,sendJackpot, and sendNFT
+    function checkWinner(){
+        address payable[] memory winners;
+        
+        uint256 count = 0;
+        uint256 losingGame = 0;
+        uint256 winingGame = 0;
+        address add;
+        address betAmount;
+        address payable PlayerAddress;
+        
+        for(uint256 i =0; i < players.length;i++){
+            playerID players[i];
+        }
+        
+        
+    }
+    
+    function sendJackpot(){
+        address payable PlayerAddress;
+        
+        
+        //restart
+        delete PlayerID[PlayerAddress];
+        players.length = 0;
+        
+        
+    }
+    
+    function sendNFT(){
+        address payable PlayerAddress;
+        //transfer ERC-721
+        
+        
+        //restart
+        
+        
+    }
+    
+
 }
