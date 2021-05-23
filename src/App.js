@@ -43,7 +43,7 @@ function App() {
 
       <div className="row">
         <Row>
-          <Col className="col-3">
+          <Col className="col-2">
             <div id="sidebar">
               <Sidebar />
             </div>

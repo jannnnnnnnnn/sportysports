@@ -6,7 +6,7 @@ const Main = () => {
     return (
         
         <div>
-            <Card className="text-center">
+            <Card className="text-center card-margin">
                 <Link to="./winner-pool">
                      <div>
                          <Card.Header>Winner Pool</Card.Header>
@@ -18,7 +18,7 @@ const Main = () => {
                    </Link>
             </Card>
 
-            <Card className="text-center">
+            <Card className="text-center card-margin">
                 <Link to="./playoff-pool">
                     <div>
                         <Card.Header>Finals Pool</Card.Header>
@@ -30,6 +30,29 @@ const Main = () => {
                 </Link>
             </Card>
             
+            <Card className="text-center card-margin">
+                <Link to="./winner-pool">
+                     <div>
+                         <Card.Header>Winner Pool</Card.Header>
+                        <Card.Title>Boston vs. Vermont</Card.Title>
+                         <Card.Subtitle>$10,000</Card.Subtitle>
+                         
+                         <Button>Deposit Dai</Button>
+                     </div>
+                   </Link>
+            </Card>
+
+            <Card className="text-center card-margin">
+                <Link to="./playoff-pool">
+                    <div>
+                        <Card.Header>Finals Pool</Card.Header>
+                        <Card.Title>Spain vs. Canada</Card.Title>
+                         <Card.Subtitle>$10,000</Card.Subtitle>
+                         
+                         <Button>Deposit Dai</Button>
+                    </div>
+                </Link>
+            </Card>
         </div>
     )
 }

@@ -46,6 +46,7 @@ header {
   background-color: #9bd1e7;
 }
 
-.league-card {
-  background-color: #A78A7F;
+
+.card-margin {
+  margin: 50px;
 }

@@ -23,13 +23,23 @@ const Sidebar = () => {
           
             </NavDropdown.Item>
 
-            <NavDropdown.Item>
+            <NavDropdown.Item href="./soccer-leagues/premier-league">
               Premier League
             </NavDropdown.Item>
             
-            <NavDropdown.Item>
+            <NavDropdown.Item href="./soccer-leagues/premier-league">
             Euro Cup
             </NavDropdown.Item>
+
+            <NavDropdown.Item href="./soccer-leagues/premier-league"> 
+              FIFA
+            </NavDropdown.Item>
+
+            <NavDropdown.Item href="./soccer-leagues/premier-league">
+              MLS
+            </NavDropdown.Item>
+
+
           </NavDropdown>
           </Navbar.Brand>
           <NavDropdown title="Popular Pools" id="collasible-nav-dropdown">
