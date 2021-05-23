@@ -2,6 +2,7 @@ import React from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from 'react-bootstrap/Navbar'
 import { Nav, NavDropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 
 
@@ -16,6 +17,12 @@ const Sidebar = () => {
           <Nav.Link href="./main">Home</Nav.Link>
           <Navbar.Brand>
           <NavDropdown title="Soccer" id="collasible-nav-dropdown">
+          <NavDropdown.Item  href="./soccer_leagues">
+            
+              All Leagues
+          
+            </NavDropdown.Item>
+
             <NavDropdown.Item>
               Premier League
             </NavDropdown.Item>
