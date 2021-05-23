@@ -13,7 +13,7 @@ import About_us from './pages/About_us';
 import FAQ from './pages/FAQ';
 import Playoff_pool from './pages/Playoff_pool';
 import Winner_pool from './pages/Winner_pool';
-import Soccerball from './public/soccerball.gif'
+
 
 
 
@@ -25,7 +25,6 @@ function App() {
         <Row>
           <Col className="col-9 ">
             <div className="align-me">
-            <Soccerball/>
             <h1 >Sporty Sports</h1>
             </div>
           </Col>
