@@ -9,10 +9,20 @@
   margin-left: 50px;
 }
 
+.align-button-header {
+  margin: 50px;
+  margin-left: 0px;
+  
+}
+
+.league-img {
+  max-width: 200px;
+}
+
 /*
 Colors
 light green: #245334
-Blue: #3D5A6C
+Blue: #9bd1e7
 Dark Green: #214E34
 Red: #BF4342
 Brown: #A78A7F
@@ -29,5 +39,13 @@ header {
 }
 
 #main-color {
-  color: #BF4342;
+  color: #ffffff;
+}
+
+#wrapper {
+  background-color: #9bd1e7;
+}
+
+.league-card {
+  background-color: #A78A7F;
 }

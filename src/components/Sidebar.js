@@ -17,7 +17,7 @@ const Sidebar = () => {
           <Nav.Link href="./main">Home</Nav.Link>
           <Navbar.Brand>
           <NavDropdown title="Soccer" id="collasible-nav-dropdown">
-          <NavDropdown.Item  href="./soccer_leagues">
+          <NavDropdown.Item  href="./soccer-leagues">
             
               All Leagues
           

@@ -33,7 +33,7 @@ function App() {
             </div>
           </Col>
           <Col className="col-2" >
-          <div className="align-me">
+          <div className="align-button-header">
             <ConnectToWallet />
             </div>
             
