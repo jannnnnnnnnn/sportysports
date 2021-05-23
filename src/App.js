@@ -12,7 +12,10 @@ import FAQ from './pages/FAQ';
 import Playoff_pool from './pages/Playoff_pool';
 import Winner_pool from './pages/Winner_pool';
 import Soccer_leagues from './pages/Soccer_leagues.js'
-
+import Euro_cup from './pages/Euro_cup';
+import MLS from './pages/MLS';
+import Premier_league from './pages/Premier_league';
+import FIFA from './pages/FIFA';
 
 
 
@@ -48,13 +51,17 @@ function App() {
               <Sidebar />
             </div>
           </Col>
-          <Col className="col-9">
+          <Col className="col-10">
           <Route exact path="/winner-pool" component={Winner_pool} />
           <Route exact path="/about-us" component={About_us} />
           <Route exact path="/faq" component={FAQ} />
           <Route exact path="/playoff-pool" component={Playoff_pool} />
           <Route exact path="/main" component={Main} />
           <Route exact path="/soccer-leagues" component={Soccer_leagues} />
+          <Route exact path="/euro-cup" component={Euro_cup} />
+          <Route exact path="/fifa" component={FIFA} />
+          <Route exact path="/premier-league" component={Premier_league} />
+          <Route exact path="/mls" component={MLS} />
       </Col>
       </Row>
       </div>

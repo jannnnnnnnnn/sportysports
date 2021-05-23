@@ -9,33 +9,31 @@ import { Link } from 'react-router-dom';
 const Sidebar = () => {
     return (
         <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" >
-          <Navbar.Brand href="./main">Menu</Navbar.Brand>
+          <Navbar.Brand href="../main">Menu</Navbar.Brand>
          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
         <Nav >
           
-          <Nav.Link href="./main">Home</Nav.Link>
+          <Nav.Link href="../main">Home</Nav.Link>
           <Navbar.Brand>
           <NavDropdown title="Soccer" id="collasible-nav-dropdown">
           <NavDropdown.Item  href="./soccer-leagues">
-            
               All Leagues
-          
             </NavDropdown.Item>
 
-            <NavDropdown.Item href="./soccer-leagues/premier-league">
+            <NavDropdown.Item href="./premier-league">
               Premier League
             </NavDropdown.Item>
             
-            <NavDropdown.Item href="./soccer-leagues/premier-league">
+            <NavDropdown.Item href="./euro-cup">
             Euro Cup
             </NavDropdown.Item>
 
-            <NavDropdown.Item href="./soccer-leagues/premier-league"> 
+            <NavDropdown.Item href="./fifa"> 
               FIFA
             </NavDropdown.Item>
 
-            <NavDropdown.Item href="./soccer-leagues/premier-league">
+            <NavDropdown.Item href="./mls">
               MLS
             </NavDropdown.Item>
 
@@ -60,8 +58,8 @@ const Sidebar = () => {
             </NavDropdown.Item>
           </NavDropdown>
 
-          <Nav.Link href="./about-us">About Us</Nav.Link>
-          <Nav.Link href="./faq">FAQ</Nav.Link>
+          <Nav.Link href="../about-us">About Us</Nav.Link>
+          <Nav.Link href="../faq">FAQ</Nav.Link>
           
         </Nav>
         </Navbar.Collapse>
