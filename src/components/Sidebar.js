@@ -8,14 +8,13 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
     return (
-        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" >
+        <Navbar className="sidebar" expand="lg" bg="primary" variant="dark" >
           <Navbar.Brand href="../main">Menu</Navbar.Brand>
          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
         <Nav >
           
           <Nav.Link href="../main">Home</Nav.Link>
-          <Navbar.Brand>
           <NavDropdown title="Soccer" id="collasible-nav-dropdown">
           <NavDropdown.Item  href="./soccer-leagues">
               All Leagues
@@ -39,7 +38,6 @@ const Sidebar = () => {
 
 
           </NavDropdown>
-          </Navbar.Brand>
           <NavDropdown title="Popular Pools" id="collasible-nav-dropdown">
           <NavDropdown.Item href="./winner-pool">
           Winner
