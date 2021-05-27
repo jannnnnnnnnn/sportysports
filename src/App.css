@@ -1,6 +1,6 @@
 
 .align-me {
-  margin: 50px;
+  margin: 10 100px;
   text-align: center;
 }
 
@@ -48,7 +48,8 @@ header {
 
 
 .card-margin {
-  margin: 50px;
+  margin: 50px 100px;
+
 }
 
 .sidebar {

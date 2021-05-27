@@ -46,12 +46,12 @@ function App() {
 
       <div className="row">
         <Row>
-          <Col className="col-2">
+          <Col className="col-1">
             <div id="sidebar">
               <Sidebar />
             </div>
           </Col>
-          <Col className="col-10">
+          <Col className="col-11 ">
           <Route exact path="/winner-pool" component={Winner_pool} />
           <Route exact path="/about-us" component={About_us} />
           <Route exact path="/faq" component={FAQ} />

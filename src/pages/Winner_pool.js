@@ -4,7 +4,7 @@ import { Button, Card } from 'react-bootstrap'
 function Winner_pool() {
     return (
         <div>
-            <Card className=" card-margin" bg="light">
+            <Card className="card-margin" bg="light">
             <h1>Winner Pool</h1>
             <h3>Boston vs. Vermont</h3>
             <h3>$10,000</h3>

@@ -2,7 +2,7 @@ import React from 'react'
 
 function About_us() {
     return (
-        <div>
+        <div className="align-me">
             <h1>This is the about the amazing Sporty Sports Team</h1>
 
             <h2>Frontend</h2>  
