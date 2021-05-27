@@ -1,21 +1,19 @@
 import React from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from 'react-bootstrap/Navbar'
 import { Nav, NavDropdown } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+
 
 
 
 const Sidebar = () => {
     return (
-        <Navbar className="sidebar" expand="lg" bg="primary" variant="dark" >
-          <Navbar.Brand href="../main">Menu</Navbar.Brand>
-         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav >
+      
+        <Nav className="sidebar" bg="primary">
+        
           
+            
           <Nav.Link href="../main">Home</Nav.Link>
-          <NavDropdown title="Soccer" id="collasible-nav-dropdown">
+          <NavDropdown title="Soccer" >
           <NavDropdown.Item  href="./soccer-leagues">
               All Leagues
             </NavDropdown.Item>
@@ -38,7 +36,7 @@ const Sidebar = () => {
 
 
           </NavDropdown>
-          <NavDropdown title="Popular Pools" id="collasible-nav-dropdown">
+          <NavDropdown title="Popular Pools">
           <NavDropdown.Item href="./winner-pool">
           Winner
             </NavDropdown.Item>
@@ -47,7 +45,7 @@ const Sidebar = () => {
             </NavDropdown.Item>
           </NavDropdown>
 
-          <NavDropdown title="My Pools" id="collasible-nav-dropdown">
+          <NavDropdown title="My Pools" >
           <NavDropdown.Item href="./winner-pool">
           Winner
             </NavDropdown.Item>
@@ -60,8 +58,7 @@ const Sidebar = () => {
           <Nav.Link href="../faq">FAQ</Nav.Link>
           
         </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+       
     )
 }
 
