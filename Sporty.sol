@@ -31,11 +31,13 @@ interface DaiToken {
 contract owned {
     DaiToken daitokenn;
     address payable public owner;
+    uint256 sub;
+    uint256 add;
     //address tokenOwner;
     
     constructor() public{
-        owner = msg.sender;
-        daitokenn  = DaiToken(0x001b3b4d0f3714ca98ba10f6042daebf0b1b7b6f); // DAI on mumbai
+        //owner = msg.sender;
+        daitokenn  = DaiToken(0x001B3B4d0F3714Ca98ba10F6042DaEbF0B1B7b6F); // DAI on mumbai
     }
     
     modifier onlyOwner {
@@ -53,10 +55,10 @@ contract owned {
 
     mapping(address => mapping (address => uint256)) allowed;
     
-    function balanceOf(address tokenOwner) public override view returns (uint256) {
+    function balanceOf(address tokenOwner) public view returns (uint256) {
         return balances[tokenOwner];
     }
-    function transfer(address owner, uint256 numTokens) public override returns (bool) {
+    function transfer(address owner, uint256 numTokens) public returns (bool) {
         require(numTokens <= balances[msg.sender]);
         balances[msg.sender] = balances[msg.sender].sub(numTokens);
         balances[owner] = balances[owner].add(numTokens);
@@ -64,17 +66,17 @@ contract owned {
         return true;
     }
 
-    function approve(address delegate, uint256 numTokens) public override returns (bool) {
+    function approve(address delegate, uint256 numTokens) public returns (bool) {
         allowed[msg.sender][delegate] = numTokens;
         emit Approval(msg.sender, delegate, numTokens);
         return true;
     }
 
-    function allowance(address owner, address delegate) public override view returns (uint) {
+    function allowance(address owner, address delegate) public view returns (uint) {
         return allowed[owner][delegate];
     }
 
-    function transferFrom(address owner, address winner, uint256 numTokens) public override returns (bool) { //tokens to winner. check
+    function transferFrom(address owner, address winner, uint256 numTokens) public returns (bool) { //tokens to winner. check
         require(numTokens <= balances[owner]);
         require(numTokens <= allowed[owner][msg.sender]);
 
@@ -134,7 +136,7 @@ contract sportPool is InitPool, TimeLimit, owned {
         name = _name;
         rate = _rate;
         deadline = _deadline;
-        token = new daitokenn(_deadline); //double ceck to make sure calling right DaiToken/daitoken
+        token = new owned(_deadline); //double ceck to make sure calling right DaiToken/daitoken
     }
     
     function whileOpen() public payable {
