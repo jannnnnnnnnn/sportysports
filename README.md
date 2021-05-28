@@ -1,3 +1,18 @@
+# Sporty Sports
+## A Fantasy Sport Betting Experience
+
+### What Is Sporty Sports?
+
+Sporty Sports is a Polygon native sports betting dApp that utilizes useDapp. We want to increase the use-case and functionality of L2 for the average consumer. By decreasing the pain points of L1 scalability and creating a beautiful UI design, we have developed a sports betting experience for the modern consumer. 
+
+**All while being secured on the blockchain!**
+
+### How Does It Work?
+
+User chooses which games they want to bet on, chooses team they want to bet for, enters how much they want to bet, and then just has to wait for results! 
+
+**Prizes will automatically be distributed to winners!**
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
