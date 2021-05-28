@@ -5,7 +5,10 @@ pragma solidity >0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-//import "nft contract"
+import "https://github.com/abdk-consulting/abdk-libraries-solidity/blob/master/ABDKMath64x64.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/IERC721.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/IERC721Receiver.sol";
+//import nftcontract
 
 // Game Pool Logic contract
 // Game Pools- Playoffs and Winners
@@ -26,19 +29,19 @@ interface DaiToken {
 }
 
 contract owned {
-    DaiToken daitoken;
-    address owner;
-    address tokenOwner;
+    DaiToken daitokenn;
+    address payable public owner;
+    //address tokenOwner;
     
     constructor() public{
         owner = msg.sender;
-        daitoken  = DaiToken(0x001b3b4d0f3714ca98ba10f6042daebf0b1b7b6f); // DAI on mumbai
+        daitokenn  = DaiToken(0x001b3b4d0f3714ca98ba10f6042daebf0b1b7b6f); // DAI on mumbai
     }
     
     modifier onlyOwner {
         require(msg.sender == owner,
         "Only the contract owner may access.");
-        _;                          //this modifier may need to be removed?
+        _;                          
     }
     
     //events & address tracking
@@ -50,8 +53,6 @@ contract owned {
 
     mapping(address => mapping (address => uint256)) allowed;
     
-    
-    //functions of token, these need to be fixed
     function balanceOf(address tokenOwner) public override view returns (uint256) {
         return balances[tokenOwner];
     }
@@ -90,7 +91,7 @@ contract InitPool {
     //allows deposits & withdrawal to contract in eth
     uint pendingWithdraw;
     
-    address payable public owner;
+    //address payable public owner;
     
     
     //---> check to make sure can only withdraw before deadline
@@ -119,63 +120,61 @@ contract TimeLimit {
 }
 
 //sets Dai as token for pool
-contract sportPool is InitPool, TimeLimit {
+contract sportPool is InitPool, TimeLimit, owned {
     string public name;
     address public token;
     uint256 public rate;
+    bool PastDeadline;
     
-    event PastDeadline(bool deadlinePast);
+    //event PastDeadline(bool deadlinePast);
     
-    function Pool(string memory _name, uint256 _rate, uint256 _deadline) public{
-        require (_rate > 0);
-        require (_deadline > block.timestamp);
+    function Pool(string memory _name, uint256 _rate, uint256 _deadline) public {
+        require(_rate > 0);
+        require(_deadline > block.timestamp);
         name = _name;
         rate = _rate;
         deadline = _deadline;
-        token = new DaiToken(_deadline); //double ceck to make sure calling right DaiToken/daitoken
+        token = new daitokenn(_deadline); //double ceck to make sure calling right DaiToken/daitoken
     }
     
-    //fix parserError
-    function () public payable WhileOpen {
-        require(msg.value > 0);
-        uint256 poolAmount = rate.mul(msg.value);
-        require(DaiToken(token).issueTokens(msg.sender, poolAmount));
-    }
+    function whileOpen() public payable {
+       require(msg.value > 0);
+       uint256 poolAmount = rate.mul(msg.value);
+      require(daitokenn(token).issueTokens(msg.sender, poolAmount));
+     
     
-    if (block.timestamp <= deadline){
-        function withdraw() public 
+     if (block.timestamp <= deadline){
+        //function withdraw() public 
         uint amount = pendingWithdraw[msg.sender];
         pendingWithdraw[msg.sender] = 0;
         payable(msg.sender).transfer(amount);
     }
     else {
-        //emit boolean result for (block.timestamp>deadline), past deadline for withdrawal
+       //return bool deadlinePast true;
     }
     
  }
+}
+    
  
 //pass pool to contract
-contract moreSporty is owned {
-    //allow deposits to contract
-    // address payable public owner;
-    
-    
+contract moreSporty is owned, sportPool {
+  
     event JackpotWinners(uint256 amount); //emit how much winner won
     event TeamAWin(bool result); //check team A win
     event TeamBWin(bool result); //check team B win
     //other events?
     
-    address payable[] public players; 
-    uint256 public minimumBet; 
+    address payable[] public players;
+    //uint256 public minimumBet; 
     uint256 public betTeamA; 
     uint256 public betTeamB;
     uint256 public totalNumberBets;
     uint256 public maxBetsInPool;
-    
-    DaiToken public token;
+    uint16 teamChoice;
     
     struct Player {
-        //uint256 betAmount;
+        uint256 betAmount;
         uint16 teamChoice;
         
      }
@@ -187,13 +186,14 @@ contract moreSporty is owned {
     }  // may need to change/split owned contract
     
     enum States { open, closed, complete, cancelled } // game state, open default
-    States state = states.open;
+    States state = States.open;
     
-    mapping(address => PlayerID) public PlayerID;
-    mapping(address => mapping(uint256 => uint256)) public betAmount;
+    mapping(address => Player) public PlayerID;
+    //mapping(address => mapping(uint256 => uint256)) public betAmount;
     
     
-    function checkPlayerEntered(address payable player) public view returns bool{
+    function checkPlayerEntered(address payable player) public{
+        //require(address != NULL_ADDRESS);
          for(uint256 i =0; i < players.length;i++){
              if(players[i] == player) return true;
              else {
@@ -203,15 +203,60 @@ contract moreSporty is owned {
     }
     
     function enterGame(){
+        require(checkPlayerEntered == true);
+        require(daitokenn(token).issueTokens(msg.sender, poolAmount));
+        require(msg.value >= minimumBet, "Please enter a bet amount of at least 20!");
+        require(daitokenn.balanceOf(address(msg.sender)) >= minimumBet, "Please deposit enough DAI to play!");
         
+        PlayerID[msg.sender].betAmount = msg.value;
+        PlayerID[msg.sender].teamChoice = teamChoice;
+        
+        //choose team A
+        if (teamChoice == 1){
+            betTeamA + msg.value;
+        }
+        else{
+            betTeamB + msg.value;
+        }
+        
+        //add player to array of players
+        players.push(msg.sender);
+        
+    }
+    
+    function deadlineReached(){
+        //closes game entry
+        require(States.open);
+        require(msg.sender == owner);
+        
+        //pass deadlineReached here
+        //if deadlineReached (state == states.closed);
     }
     
     function gameResult(){
+        require(States.open);
+        require(msg.sender == owner);
         
+        //checkgamereult
+        //return winningTeam
+        
+         States.complete;
+    }
+    
+    function gameCancelled(){
+        require (States.open);
+        require(msg.sender == owner);
+        
+        //check if game cancelled
+        
+        state = states.cancelled;
     }
     
     /// can combine checkWinner,sendJackpot, and sendNFT
-    function checkWinner(){
+    function youWon(){
+        require(States.complete);
+        require(msg.sender == owner);
+        
         address payable[] memory winners;
         
         uint256 count = 0;
@@ -221,21 +266,34 @@ contract moreSporty is owned {
         address betAmount;
         address payable PlayerAddress;
         
+        //loop to add winning players to winner array
         for(uint256 i =0; i < players.length;i++){
-            playerID players[i];
+            playerID = players[i];
+            if (playerID[PlayerAddress].teamChoice == winningTeam){
+                winners[count] = PlayerAddress;
+                count++;
+            }
+            //else, there is no else. they just get left out of array
         }
+        
+        
+        
+        
         
         
     }
     
     function sendJackpot(){
+        require(States.closed);
+        require(msg.sender == owner);
+        
         address payable PlayerAddress;
+        
         
         
         //restart
         delete PlayerID[PlayerAddress];
         players.length = 0;
-        
         
     }
     
