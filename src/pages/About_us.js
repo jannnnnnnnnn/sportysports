@@ -7,13 +7,13 @@ function About_us() {
 
             <h2>Frontend</h2>  
 
-            <img src="" alt="En Canada"/>
+            <img src='/images/en.jpg' alt="En Canada"/>
 
             <h2>Backend</h2>
 
-            <img src="" alt="Rachel"/>
+            <img src='/images/rachel.jpg' alt="Rachel"/>
 
-            <img src="" alt="Janet"/>
+            <img src='/images/janet.jpg' alt="Janet"/>
 
             <h3>We all worked together to bring Sporty Sports alive!!</h3>
         </div>
