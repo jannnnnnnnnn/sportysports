@@ -13,7 +13,7 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 // Game Pool Logic contract
 // Game Pools- Playoffs and Winners
 
-//need oracle to know game results
+//need api/oracle to know game results
 
 // Dai Itegration
 interface DaiToken {
@@ -149,9 +149,9 @@ contract sportPool is InitPool, TimeLimit, owned {
         pendingWithdraw[msg.sender] = 0;
         payable(msg.sender).transfer(amount);
     }
-    else {
+    //else {
        //return bool deadlinePast true;
-    }
+    //}
     
  }
 }
@@ -159,24 +159,24 @@ contract sportPool is InitPool, TimeLimit, owned {
  
 //pass pool to contract
 contract moreSporty is owned, sportPool {
+    //assign team A as 1, b as else
   
-    event JackpotWinners(uint256 amount); //emit how much winner won
+    //event JackpotWinners(uint256 amount); //emit how much winner won
     event TeamAWin(bool result); //check team A win
     event TeamBWin(bool result); //check team B win
     //other events?
     
     address payable[] public players;
-    //uint256 public minimumBet; 
-    uint256 public betTeamA; 
-    uint256 public betTeamB;
-    uint256 public totalNumberBets;
-    uint256 public maxBetsInPool;
+    uint256 public teamAPool; 
+    uint256 public teamBPool;
     uint16 teamChoice;
-    
+    uint16 winningTeam;
+    uint256 teamChoiceA = 0;
+    uint256 teamChoiceB = 0;
+
     struct Player {
         uint256 betAmount;
         uint16 teamChoice;
-        
      }
     
     constructor() public{
@@ -202,7 +202,7 @@ contract moreSporty is owned, sportPool {
          }
     }
     
-    function enterGame(){
+    function enterGame(uint256 poolAmount, uint minimumBet) public {
         require(checkPlayerEntered == true);
         require(daitokenn(token).issueTokens(msg.sender, poolAmount));
         require(msg.value >= minimumBet, "Please enter a bet amount of at least 20!");
@@ -213,10 +213,13 @@ contract moreSporty is owned, sportPool {
         
         //choose team A
         if (teamChoice == 1){
-            betTeamA + msg.value;
+            teamAPool + msg.value;
+            teamChoiceA++;
         }
+        //choose Team B
         else{
-            betTeamB + msg.value;
+            teamBPool + msg.value;
+            teamChoiceB++;
         }
         
         //add player to array of players
@@ -224,88 +227,105 @@ contract moreSporty is owned, sportPool {
         
     }
     
-    function deadlineReached(){
+    function deadlineReached() public {
         //closes game entry
         require(States.open);
         require(msg.sender == owner);
         
         //pass deadlineReached here
-        //if deadlineReached (state == states.closed);
+        //if deadlineReached  States.closed;
     }
     
-    function gameResult(){
+    function gameResult() public {
         require(States.open);
         require(msg.sender == owner);
         
         //checkgamereult
-        //return winningTeam
-        
-         States.complete;
+        //TeamA == 1, TeamB else
+        //return winningTeam;
+   
+        States.complete;
     }
     
-    function gameCancelled(){
+    function gameCancelled()public{
         require (States.open);
         require(msg.sender == owner);
         
         //check if game cancelled
         
-        state = states.cancelled;
+        States.cancelled;
     }
     
     /// can combine checkWinner,sendJackpot, and sendNFT
-    function youWon(){
+    function youWon(address payable player, uint256 betAmount) public {
         require(States.complete);
         require(msg.sender == owner);
         
         address payable[] memory winners;
         
-        uint256 count = 0;
-        uint256 losingGame = 0;
-        uint256 winingGame = 0;
+        uint256 countWon = 0;
+        uint256 countLost = 0;
         address add;
-        address betAmount;
+        address dist;
         address payable PlayerAddress;
+        address losers;
         
-        //loop to add winning players to winner array
+        //loop to add winning & losing players to proper array
+        //can't pass entire mappings, Player instead of PlayerID..
         for(uint256 i =0; i < players.length;i++){
-            playerID = players[i];
-            if (playerID[PlayerAddress].teamChoice == winningTeam){
-                winners[count] = PlayerAddress;
-                count++;
+            player = players[i];
+            if (player[PlayerAddress].teamChoice == winningTeam){
+                winners[countWon] = PlayerAddress;
+                countWon++;
             }
-            //else, there is no else. they just get left out of array
+            
+            else {
+                losers[countLost] = PlayerAddress;
+                countLost++;
+            }
         }
         
+        //fix denomination for dai
+        uint256 grandTotal = teamAPool + teamBPool;
+        uint256 JackpotAmount = (grandTotal - (grandTotal * .1)); //takes house fee
         
         
-        
-        
-        
+        if(winningTeam == 1){
+            uint256 multiplier = ((JackpotAmount - teamAPool)/teamAPool);
+            uint256 amountWon = ((betAmount * multiplier) + betAmount);
+            for(uint256 k = 0; k < countWon; k++){
+                if(winners[k] != address(0)){
+                    add = winners[k];
+                    dist = PlayerID[add].betAmount;
+                    daitokenn.transferFrom(owner, address(winners[k]), amountWon);
+                    daitokenn.transferFrom(owner, address(winners[k]), betAmount);
+                    //send nft
+                }
+            }
+            
+        }
+        else{
+            uint256 multiplier = ((JackpotAmount - teamBPool)/teamBPool);
+            uint256 amountWon = ((betAmount * multiplier) + betAmount);
+            for(uint256 k = 0; k < countWon; k++){
+                if(winners[k] != address(0)){
+                    add = winners[k];
+                    dist = PlayerID[add].betAmount;
+                    daitokenn.transfer(owner, address(winners[k]), amountWon);
+                    daitokenn.transfer(owner, address(winners[k]), betAmount);
+                    //send nft
+                }
+            }
+   
     }
-    
-    function sendJackpot(){
-        require(States.closed);
-        require(msg.sender == owner);
-        
-        address payable PlayerAddress;
-        
-        
-        
-        //restart
+         //restart game
         delete PlayerID[PlayerAddress];
         players.length = 0;
+        countWon = 0;
+        countLost = 0;    
+        teamChoiceA = 0;
+        teamChoiceB = 0;
+        }
+    
         
     }
-    
-    function sendNFT(){
-        address payable PlayerAddress;
-        //transfer ERC-721
-        
-        
-        //restart
-        
-        
-    }
-    
-
-}
