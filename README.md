@@ -1,4 +1,5 @@
 # Sporty Sports
+[Link to Deployed App](https://sportysports.herokuapp.com/)
 ## A Fantasy Sport Betting Experience
 
 ### What Is Sporty Sports?
