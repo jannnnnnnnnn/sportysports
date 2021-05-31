@@ -6,6 +6,8 @@
 
 Sporty Sports is a Polygon native sports betting dApp that utilizes useDapp. We want to increase the use-case and functionality of L2 for the average consumer. By decreasing the pain points of L1 scalability and creating a beautiful UI design, we have developed a sports betting experience for the modern consumer. 
 
+[Watch our submission video here!](https://www.youtube.com/watch?v=GO3Hm9-bZKo)
+
 **All while being secured on the blockchain!**
 
 ### How Does It Work?
